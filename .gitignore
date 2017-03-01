@@ -9,3 +9,15 @@ target/
 .classpath
 .project
 /bin
+
+# Eclipse
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+dump.rdb
+
+# Mac
+.DS_Store

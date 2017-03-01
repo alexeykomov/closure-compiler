@@ -43,6 +43,9 @@ import com.google.javascript.jscomp.deps.SourceCodeEscapers;
 import com.google.javascript.rhino.Node;
 import com.google.javascript.rhino.TokenStream;
 import com.google.protobuf.CodedOutputStream;
+import info.persistent.react.jscomp.ReactCompilerPass;
+import info.persistent.react.jscomp.ReactWarningsGuard;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.Closeable;
@@ -1006,6 +1009,11 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
 
     compiler = createCompiler();
     B options = createOptions();
+
+    options.addWarningsGuard(new ReactWarningsGuard());
+    options.addCustomPass(
+        CustomPassExecutionTime.BEFORE_CHECKS,
+        new ReactCompilerPass(compiler));
 
     List<SourceFile> externs = createExterns(options);
 
